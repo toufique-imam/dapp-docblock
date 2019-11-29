@@ -1,0 +1,24 @@
+{
+  "name": "dapp-docblock",
+  "version": "0.0.1",
+  "description": "Document Verification Using Blockchain",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "npm run test",
+    "dev": "lite-server",
+    "test": "lite-server"
+  },
+  "author": "sabertooth",
+  "license": "",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "dependencies": {
+    "truffle": "^4.0.6",
+    "truffle-hdwallet-provider": "0.0.3",
+    "lite-server": "^2.3.0"
+  }
+}

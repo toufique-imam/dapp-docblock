@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="assets/png/005-cloud.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>DOCBLOCK</title>
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/carousel.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body style="background-color: rgb(11, 22, 50);">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: rgb(11, 22, 50);">
+            <a class="navbar-brand" href="index.html">DOCBLOCK</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">In Action</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="about.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        <div class="_24ZvqTyluJ">
+            <div class="IWE0IhBuHE">
+                <div class="_26MB2HU_1R">
+                    <div class="_1qy_G4-nbf"
+                        style="background-image:url(./static/outside-ring-459fda1df1e1f302ea31113826c7d353.svg)"></div>
+                    <div class="_355n-4Ywg0"
+                        style="background-image:url(./static/middle-ring-715571610e5e50941c8728b7b92bc9c9.svg)"></div>
+                    <div class="_122rGWCI5w"
+                        style="background-image:url(./static/inside-ring-f999ec12d8d7740ef0f29b069316fd09.svg)"></div>
+                </div>
+            </div>
+            <div class="container marketing">
+                <div class="row">
+                    <!-- /.col-lg-4 -->
+                    <div class="col-lg-4" id="errorbox" style="padding: 10px;">
+                        <img class="" src="assets/png/012-error.png" alt="Generic placeholder image" width="140"
+                            height="140">
+                        <h2 class="text-danger">Error</h2>
+                        <p class="lead text-danger" id="error-text">This is a modified jumbotron that occupies the
+                            entire
+                            horizontal space of its parent.</p>
+                    </div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4" style="padding: 10px;" id="accountinfox">
+                        <img class="" src="assets/png/030-website.png" alt="Generic placeholder image" width="140"
+                            height="140">
+                        <h2>Account Info</h2>
+                        <h5 class="text-info" id="accountName" style="text-align: center;">Name holder</h5>
+                        <p class="text-info" id="accountAddress" style="text-align: center;">k of the card's
+                            content.</p>
+                    </div>
+                    <div class="col-lg-4" id="infobox" style="padding: 10px;">
+                        <img class="" src="assets/png/025-page.png" alt="Generic placeholder image" width="140"
+                            height="140">
+                        <h2 class="text-success">Success</h2>
+                        <p class="lead text-success" id="info-text">This is a modified jumbotron that occupies the
+                            entire
+                            horizontal space of its parent.</p>
+                    </div><!-- /.col-lg-4 -->
+                </div><!-- /.row -->
+
+                <!-- START THE FEATURETTES -->
+                <hr class="featurette-divider">
+                <div id="loader">
+                    <p class="text-center">Loading...</p>
+                </div>
+                <div id="getname">
+                    <form onsubmit="App.setName(); return false;">
+                        <label>Your accout name</label>
+                        <input type="text" required class="form-control" id="nameinput">
+                        <br />
+                        <button type="submit" class="btn btn-primary">Set Name</button>
+                        <hr />
+                    </form>
+                </div>
+                <div id="content">
+                    <div class="row featurette">
+                        <div class="col-md-7">
+                            <h2 class="featurette-heading">Upload Your <span class="text-muted">Document</span>
+                            </h2>
+                            <hr />
+                            <br />
+                            <form onsubmit="App.addfile(); return false;">
+                                <div class="input-group mb-2">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile02"
+                                            onChange="App.captureFile()">
+                                        <label class="custom-file-label" for="inputGroupFile02" id="labelinput1">Choose
+                                            file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="input-group-text btn btn-primary" id=""
+                                            type="submit">Upload</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-3">
+                            <img class="featurette-image img-fluid mx-auto" src="assets/png/029-upload.png"
+                                alt="Generic placeholder image">
+                        </div>
+                    </div>
+
+                    <hr class="featurette-divider">
+
+                    <div class="row featurette">
+                        <div class="col-md-7 order-md-2">
+                            <h2 class="featurette-heading">Verify <span class="text-muted">Document</span>
+                            </h2>
+                            <hr />
+                            <br />
+                            <form onsubmit="App.verifyDocument(); return false;">
+                                <div class="input-group mb-2">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                            onChange="App.captureFileX()">
+                                        <label class="custom-file-label" for="inputGroupFile02" id="labelinput2">Choose
+                                            file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="input-group-text btn btn-primary" id=""
+                                            type="submit">Verify</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-3 order-md-1">
+                            <img class="featurette-image img-fluid mx-auto" src="assets/png/022-searching.png"
+                                alt="Generic placeholder image">
+                        </div>
+                    </div>
+
+                    <hr class="featurette-divider">
+
+                    <div class="row featurette">
+                        <div class="col-md-7">
+                            <h2 class="featurette-heading">Download Your Document from <span
+                                    class="text-muted">IPFS</span></h2>
+                            <hr>
+                            <br>
+                            <p class="lead">Will be added soon!</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img class="featurette-image img-fluid mx-auto" src="assets/png/011-download.png"
+                                alt="Generic placeholder image">
+                        </div>
+                    </div>
+
+                    <hr class="featurette-divider">
+                </div>
+                <!-- /END THE FEATURETTES -->
+
+            </div><!-- /.container -->
+
+            <footer class="container">
+                <p class="float-right"><a href="#">Back to top</a></p>
+                <p>&copy; 2019-2020 sabertooth, Inc. &middot; <a href="#" style="color: antiquewhite;">Privacy</a> &middot; <a href="#" style="color: antiquewhite;">Terms</a></p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/sha256.min.js"></script>
+</body>
+
+</html>
