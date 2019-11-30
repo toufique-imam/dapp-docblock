@@ -1,5 +1,5 @@
 var HDWalletProvider = require("truffle-hdwallet-provider");
-
+var fs = requie('fs');
 var infura_apikey = "Infura app id";
 var mnemonic = "mnemonic from metamask";
 var address = "address of your account"
