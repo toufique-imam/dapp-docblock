@@ -113,6 +113,7 @@ App = {
     var filebuffer = await App.node.cat(hashtext);
     var stringval = filebuffer.toString();
     console.log(stringval);
+    //let stringval = "data:application/pdf;base64,JVBERi0xLjQKJSDi48/..........."
     let encodedString = stringval.split(';base64,').pop();
 
     let data = atob(encodedString);
