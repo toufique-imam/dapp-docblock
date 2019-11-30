@@ -17,8 +17,8 @@
     "lite-server": "^2.3.0"
   },
   "dependencies": {
-    "fs-web": "^1.0.1",
     "lite-server": "^2.3.0",
+    "mime-types": "^2.1.25",
     "truffle": "^4.0.6",
     "truffle-hdwallet-provider": "0.0.3"
   }
