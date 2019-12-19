@@ -1,4 +1,3 @@
-
 App = {
   web3: null,
   web3Provider: null,
@@ -242,7 +241,7 @@ App = {
       console.error("error :x :install metamask");
       return App.showError("error :: install metamask");
     }
-
+    App.buffer = null;
     let contractx = web3.eth.contract(App.ContractABI).at(App.contractAddress);
     console.log(contractx);
     contractx.add(s, App.account, function (err, result) {
@@ -252,10 +251,11 @@ App = {
         App.node.add(App.buffer2, function (errx, resipfs) {
           if (errx === null) {
             console.log(resipfs[0].hash);
-            return App.showInfo("file added :: " + result + "<br>IPFS HASH :: " + resipfs[0].hash);
+            App.buffer2 = null;
+            return App.showInfo('file added :: ' + result + '<br><h7 class="text-danger">Please save this IPFS HASH This will be shown only for one time</h7><br>IPFS HASH :: ' + resipfs[0].hash);
           }
           else {
-            return App.showError(errx.message.toString() + err.stack.toString());
+            return App.showError(errx.message.toString() + errx.stack.toString());
           }
         });
 
@@ -279,7 +279,7 @@ App = {
       console.error("error :: install metamask");
       return App.showError(err.toString());
     }
-
+    App.buffer1 = null;
     let contractx = web3.eth.contract(App.ContractABI).at(App.contractAddress);
     console.log(contractx);
     contractx.verify_doc(s, function (err, result) {
