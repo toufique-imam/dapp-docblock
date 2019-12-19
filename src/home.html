@@ -96,14 +96,30 @@
                 <div id="loader">
                     <p class="text-center">Loading...</p>
                 </div>
+                
                 <div id="getname">
-                    <form onsubmit="App.setName(); return false;">
-                        <label>Your accout name</label>
-                        <input type="text" required class="form-control" id="nameinput">
-                        <br />
-                        <button type="submit" class="btn btn-primary">Set Name</button>
-                        <hr />
-                    </form>
+                    <div class="row featurette">
+                        <div class="col-md-7">
+                            <h2 class="featurette-heading">Sign Up in<span
+                                    class="text-muted">DocBLOCK</span></h2>
+                            <hr>
+                            <br>
+                            <form onsubmit="App.setName(); return false;">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Name" aria-label="" aria-describedby="button-addon4" id="nameinput" required>
+                                    <div class="input-group-append" id="button-addon4">
+                                        <button class="btn btn-outline-secondary" type="submit">Set Name</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+                            <br>
+                        </div>
+                        <div class="col-md-3">
+                            <img class="featurette-image img-fluid mx-auto" src="assets/png/018-network.png"
+                                alt="Generic placeholder image">
+                        </div>
+                    </div>
                 </div>
                 <div id="content">
                     <div class="row featurette">
