@@ -29,7 +29,7 @@ You need to pay attention to configure MetaMask and make sure you have enough et
 
 # TODO:
 
-* Fix IPFS bug
+* Add folder upload and mail send
 
 # Donation Address
 
