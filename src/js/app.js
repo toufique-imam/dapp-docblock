@@ -386,6 +386,11 @@ App = {
     loader.show();
     content.hide();
     get_name.hide();
+    if (typeof web3 === "undefined") {
+      loader.hide();
+      console.error("Error :: install metamask");
+      return App.showError("<br><b>Error :: install <a style=\"color: #FFF;\" href=\"https:\\metamask.io\">MetaMask and restart your browser</a></b><br>");
+    }
     if (window.ethereum)
       try {
         await window.ethereum.enable();
@@ -393,6 +398,7 @@ App = {
       } catch (err) {
         return App.showError("Access to your Ethereum account rejected.");
       }
+    
     // Load account data
     web3.eth.getCoinbase(function (err, account) {
       if (err === null) {
