@@ -24,7 +24,6 @@
     <link href="css/carousel.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.min.js"></script>
-
 </head>
 
 <body style="background-color: rgb(11, 22, 50);">
@@ -76,14 +75,7 @@
                             entire
                             horizontal space of its parent.</p>
                     </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4" style="padding: 10px;" id="accountinfox">
-                        <img class="" src="assets/png/030-website.png" alt="Generic placeholder image" width="140"
-                            height="140">
-                        <h2>Account Info</h2>
-                        <h5 class="text-info" id="accountName" style="text-align: center;">Name holder</h5>
-                        <p class="text-info" id="accountAddress" style="text-align: center;">k of the card's
-                            content.</p>
-                    </div>
+
                     <div class="col-lg-4" id="infobox" style="padding: 10px;">
                         <img class="" src="assets/png/025-page.png" alt="Generic placeholder image" width="140"
                             height="140">
@@ -99,60 +91,7 @@
                 <div id="loader">
                     <p class="text-center">Loading...</p>
                 </div>
-                
-                <div id="getname">
-                    <div class="row featurette">
-                        <div class="col-md-7">
-                            <h2 class="featurette-heading">Sign Up in<span
-                                    class="text-muted">DocBLOCK</span></h2>
-                            <hr>
-                            <br>
-                            <form onsubmit="App.setName(); return false;">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" aria-label="" aria-describedby="button-addon4" id="nameinput" required>
-                                    <div class="input-group-append" id="button-addon4">
-                                        <button class="btn btn-outline-secondary" type="submit">Set Name</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <hr>
-                            <br>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="featurette-image img-fluid mx-auto" src="assets/png/018-network.png"
-                                alt="Generic placeholder image">
-                        </div>
-                    </div>
-                </div>
                 <div id="content">
-                    <div class="row featurette">
-                        <div class="col-md-7">
-                            <h2 class="featurette-heading">Upload Your <span class="text-muted">Document</span>
-                            </h2>
-                            <hr />
-                            <br />
-                            <form onsubmit="App.addfile(); return false;">
-                                <div class="input-group mb-2">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile02"
-                                            onChange="App.captureFile()">
-                                        <label class="custom-file-label" for="inputGroupFile02" id="labelinput1">Choose
-                                            file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <button class="input-group-text btn btn-primary" id="uploadbutton"
-                                            type="submit">Upload</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="featurette-image img-fluid mx-auto" src="assets/png/029-upload.png"
-                                alt="Generic placeholder image">
-                        </div>
-                    </div>
-
-                    <hr class="featurette-divider">
 
                     <div class="row featurette">
                         <div class="col-md-7 order-md-2">
@@ -169,7 +108,7 @@
                                             file</label>
                                     </div>
                                     <div class="input-group-append">
-                                        <button class="input-group-text btn btn-primary" id="verifybutton"
+                                        <button class="input-group-text btn btn-primary" id=""
                                             type="submit">Verify</button>
                                     </div>
                                 </div>
@@ -189,10 +128,12 @@
                             <br>
                             <form onsubmit="App.ipfsfiledownload(); return false;" method="GET">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="IPFS HASH" aria-label="" aria-describedby="button-addon4" id="id_ipfshash">
+                                    <input type="text" class="form-control" placeholder="IPFS HASH" aria-label=""
+                                        aria-describedby="button-addon4" id="id_ipfshash">
                                     <div class="input-group-append" id="button-addon4">
                                         <button class="btn btn-outline-secondary" type="submit">Load File</button>
-                                        <a href="#" id="downloadLink" class="btn btn-outline-secondary" style="display: none;">Download</a>
+                                        <a href="#" id="downloadLink" class="btn btn-outline-secondary"
+                                            style="display: none;">Download</a>
                                     </div>
                                 </div>
                             </form>
@@ -225,7 +166,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/app_test.js"></script>
     <script src="js/sha256.min.js"></script>
 </body>
 
