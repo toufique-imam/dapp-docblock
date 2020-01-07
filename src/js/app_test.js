@@ -1,3 +1,4 @@
+
 App = {
     web3: null,
     web3Provider: null,
@@ -80,10 +81,17 @@ App = {
     },
     init: async function () {
         App.node = await window.Ipfs.create()
-        
+
         return await App.initWeb3();
     },
     initWeb3: async function () {
+        if (typeof web3 !== 'undefined') {
+            App.web3Provider = web3.currentProvider;
+        }
+        else {
+            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+        }
+        web3 = new Web3(App.web3Provider);
         return App.initContract();
     },
     initContract: function () {
@@ -215,7 +223,7 @@ App = {
         };
     },
     verifyDocument: async function () {
-       
+
         if (App.buffer1 == null) return;
         var s = String(App.buffer1);
 
@@ -278,7 +286,6 @@ App = {
         infobox.hide();
         loader.hide();
         content.show();
-
     }
 };
 $(function () {
