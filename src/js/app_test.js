@@ -89,7 +89,13 @@ App = {
             App.web3Provider = web3.currentProvider;
         }
         else {
-            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+            if (typeof web3 === "undefined") {
+
+                $("#loader").hide();
+                $("#content").hide();
+                console.error("Error :: install metamask");
+                return App.showError("<br><b>Error :: install <a style=\"color: #FFF;\" href=\"https:\\metamask.io\">MetaMask and restart your browser</a></b><br>");
+            }
         }
         web3 = new Web3(App.web3Provider);
         return App.initContract();
