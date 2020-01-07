@@ -90,14 +90,17 @@ App = {
         }
         else {
             if (typeof web3 === "undefined") {
-
-                $("#loader").hide();
-                $("#content").hide();
-                console.error("Error :: install metamask");
-                return App.showError("<br><b>Error :: install <a style=\"color: #FFF;\" href=\"https:\\metamask.io\">MetaMask and restart your browser</a></b><br>");
+                /*
+                                $("#loader").hide();
+                                $("#content").hide();
+                                console.error("Error :: install metamask");
+                                return App.showError("<br><b>Error :: install <a style=\"color: #FFF;\" href=\"https:\\metamask.io\">MetaMask and restart your browser</a></b><br>");
+                                */
+                App.web3Provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/api_key');
             }
         }
         web3 = new Web3(App.web3Provider);
+        App.web3 = web3;
         return App.initContract();
     },
     initContract: function () {
@@ -232,7 +235,15 @@ App = {
 
         if (App.buffer1 == null) return;
         var s = String(App.buffer1);
+        if (typeof web3 === "undefined") {
 
+            $("#loader").hide();
+            $("#content").hide();
+            console.error("Error :: install metamask");
+            return App.showError("<br><b>Error :: install <a style=\"color: #FFF;\" href=\"https:\\metamask.io\">MetaMask and restart your browser</a></b><br>");
+
+
+        }
         App.buffer1 = null;
         let contractx = web3.eth.contract(App.ContractABI).at(App.contractAddress);
         console.log(contractx);
