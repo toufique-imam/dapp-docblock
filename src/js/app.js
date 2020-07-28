@@ -81,7 +81,7 @@ App = {
     return "unknown";
   },
   init: async function () {
-    App.node = await window.Ipfs.create()
+    App.node = await window.Ipfs.create({ repo: String(Math.random() + Date.now()) })
     return await App.initWeb3();
   },
   initWeb3: async function () {

@@ -17,7 +17,7 @@
     "lite-server": "^2.3.0"
   },
   "dependencies": {
-    "@truffle/hdwallet-provider": "^1.0.28",
+    "@truffle/hdwallet-provider": "^1.0.40",
     "lite-server": "^2.3.0",
     "mime-types": "^2.1.25",
     "truffle": "^4.0.6"
