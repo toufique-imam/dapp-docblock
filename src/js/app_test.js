@@ -190,32 +190,41 @@ App = {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         $("#info-text").html(info);
     },
+    httpGetAsync: async function (url, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                callback(xmlHttp.responseText);
+            }
+        }
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send(null);
+    },
     ipfsfiledownload: async function () {
         var hashtext = document.getElementById("id_ipfshash").value
         var link = document.getElementById("downloadLink");
-        if (hashtext === null) {
-            console.log("WHAT?");
-            return;
-        }
-        var filebuffer = await App.node.cat(hashtext);
-        var stringval = filebuffer.toString();
+        if (hashtext === null) return
+        await App.httpGetAsync("https://ipfs.io/ipfs/" + hashtext, function (filebuffer) {
+            var stringval = filebuffer.toString();
+            console.log("stringval ", stringval);
+            let encodedString = stringval.split(',')[1];
+            let mimetype = stringval.split(',')[0].split(':')[1].split(';')[0];
+            console.log("Mime", mimetype)
+            let data = atob(encodedString);
+            var ab = new ArrayBuffer(data.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < data.length; i++) {
+                ia[i] = data.charCodeAt(i);
+            }
+            let blob = new Blob([ia], { "type": mimetype });
+            let filename = 'filename.' + App.getExtension(mimetype);
+            console.log(filename);
+            let file = new File([blob], filename);
 
-        let encodedString = stringval.split(',')[1];
-        let mimetype = stringval.split(',')[0].split(':')[1].split(';')[0];
-
-        let data = atob(encodedString);
-        var ab = new ArrayBuffer(data.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < data.length; i++) {
-            ia[i] = data.charCodeAt(i);
-        }
-        let blob = new Blob([ia], { "type": mimetype });
-        let filename = 'filename.' + App.getExtension(mimetype);
-        let file = new File([blob], filename);
-
-        link.href = window.URL.createObjectURL(file);
-        link.download = filename;
-        link.click();
+            link.href = window.URL.createObjectURL(file);
+            link.download = filename;
+            link.click();
+        });
     },
     captureFileX: function () {
         event.preventDefault();

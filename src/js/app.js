@@ -175,29 +175,41 @@ App = {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     $("#info-text").html(info);
   },
+  httpGetAsync: async function (url, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        callback(xmlHttp.responseText);
+      }
+    }
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+  },
   ipfsfiledownload: async function () {
     var hashtext = document.getElementById("id_ipfshash").value
     var link = document.getElementById("downloadLink");
     if (hashtext === null) return
-    var filebuffer = await App.node.cat(hashtext);
-    var stringval = filebuffer.toString();
+    await App.httpGetAsync("https://ipfs.io/ipfs/" + hashtext, function (filebuffer) {
+      var stringval = filebuffer.toString();
+      console.log("stringval " ,stringval);
+      let encodedString = stringval.split(',')[1];
+      let mimetype = stringval.split(',')[0].split(':')[1].split(';')[0];
+      console.log("Mime" , mimetype)
+      let data = atob(encodedString);
+      var ab = new ArrayBuffer(data.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < data.length; i++) {
+        ia[i] = data.charCodeAt(i);
+      }
+      let blob = new Blob([ia], { "type": mimetype });
+      let filename = 'filename.' + App.getExtension(mimetype);
+      console.log(filename);
+      let file = new File([blob], filename);
 
-    let encodedString = stringval.split(',')[1];
-    let mimetype = stringval.split(',')[0].split(':')[1].split(';')[0];
-
-    let data = atob(encodedString);
-    var ab = new ArrayBuffer(data.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < data.length; i++) {
-      ia[i] = data.charCodeAt(i);
-    }
-    let blob = new Blob([ia], { "type": mimetype });
-    let filename = 'filename.' + App.getExtension(mimetype);
-    let file = new File([blob], filename);
-
-    link.href = window.URL.createObjectURL(file);
-    link.download = filename;
-    link.click();
+      link.href = window.URL.createObjectURL(file);
+      link.download = filename;
+      link.click();
+    });
   },
   captureFile: function () {
     event.preventDefault();
@@ -225,7 +237,16 @@ App = {
       console.log("buffer", App.buffer1);
     };
   },
-
+  addInIPFS: async function (err, result) {
+    console.log("error: ", err);
+    if (err === null) {
+      const resipfs = await App.node.add(App.buffer2);
+      console.log(resipfs);
+      return App.showInfo('file added :: ' + result + '<br><h7 class="text-danger">Please save this IPFS HASH This will be shown only for one time</h7><br>IPFS HASH :: ' + resipfs.cid);
+    } else {
+      return App.showError(err.message.toString() + err.stack.toString());
+    }
+  },
   addfile: async function () {
     if (window.ethereum)
       try {
@@ -244,25 +265,8 @@ App = {
     App.buffer = null;
     let contractx = web3.eth.contract(App.ContractABI).at(App.contractAddress);
     console.log(contractx);
-    contractx.add(s, App.account, function (err, result) {
-      //console.log("error: ", err);
-      //console.log("result: ", result);
-      if (err === null) {
-        App.node.add(App.buffer2, function (errx, resipfs) {
-          if (errx === null) {
-            console.log(resipfs[0].hash);
-            App.buffer2 = null;
-            return App.showInfo('file added :: ' + result + '<br><h7 class="text-danger">Please save this IPFS HASH This will be shown only for one time</h7><br>IPFS HASH :: ' + resipfs[0].hash);
-          }
-          else {
-            return App.showError(errx.message.toString() + errx.stack.toString());
-          }
-        });
-
-      } else {
-        return App.showError(err.message.toString() + err.stack.toString());
-      }
-    });
+    var res = await contractx.add(s, App.account, App.addInIPFS);
+    console.log("Add ", res);
   },
   verifyDocument: async function () {
     if (window.ethereum)
@@ -398,7 +402,7 @@ App = {
       } catch (err) {
         return App.showError("Access to your Ethereum account rejected.");
       }
-    
+
     // Load account data
     web3.eth.getCoinbase(function (err, account) {
       if (err === null) {
