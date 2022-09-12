@@ -82,6 +82,7 @@ App = {
   },
   init: async function () {
     App.node = await window.Ipfs.create({ repo: String(Math.random() + Date.now()) })
+    
     return await App.initWeb3();
   },
   initWeb3: async function () {
@@ -258,14 +259,19 @@ App = {
 
     if (App.buffer === null) return;
     var s = String(App.buffer);
-    if (typeof web3 === "undefined") {
+    if (typeof window.ethereum === "undefined") {
       console.error("error :x :install metamask");
       return App.showError("error :: install metamask");
     }
+    
     App.buffer = null;
-    let contractx = web3.eth.contract(App.ContractABI).at(App.contractAddress);
-    console.log(contractx);
-    var res = await contractx.add(s, App.account, App.addInIPFS);
+    if(App.web3==='undefined'){
+      App.web3 = new Web3(window.ethereum);
+    }
+    window.ethereum.enable()
+    let contractx = App.web3.eth.contract(App.ContractABI).at(App.contractAddress);
+    // console.log(contractx , App.account , App.addInIPFS);
+    var res = await contractx.add(s, App.account , App.addInIPFS);
     console.log("Add ", res);
   },
   verifyDocument: async function () {
@@ -279,12 +285,12 @@ App = {
 
     if (App.buffer1 == null) return;
     var s = String(App.buffer1);
-    if (typeof web3 === "undefined") {
+    if (typeof window.ethereum === "undefined") {
       console.error("error :: install metamask");
       return App.showError(err.toString());
     }
     App.buffer1 = null;
-    let contractx = web3.eth.contract(App.ContractABI).at(App.contractAddress);
+    let contractx = App.web3.eth.contract(App.ContractABI).at(App.contractAddress);
     console.log(contractx);
     contractx.verify_doc(s, function (err, result) {
       //console.log(err, result);
@@ -346,7 +352,7 @@ App = {
       }
 
     var s = String(document.getElementById("nameinput").value);
-    if (typeof web3 === "undefined") {
+    if (typeof window.ethereum === "undefined") {
       console.error("Install metamask");
       return App.showError("Install metamask");
     }
@@ -357,7 +363,7 @@ App = {
     get_name.hide();
     loader.show();
     content.hide();
-    let contractx = web3.eth.contract(App.ContractABI).at(App.contractAddress);
+    let contractx = App.web3.eth.contract(App.ContractABI).at(App.contractAddress);
     console.log(contractx);
     contractx.setaddername(App.account, s, function (err, result) {
       //console.log("error: ", err);
@@ -390,7 +396,7 @@ App = {
     loader.show();
     content.hide();
     get_name.hide();
-    if (typeof web3 === "undefined") {
+    if (typeof window.ethereum === "undefined") {
       loader.hide();
       console.error("Error :: install metamask");
       return App.showError("<br><b>Error :: install <a style=\"color: #FFF;\" href=\"https:\\metamask.io\">MetaMask and restart your browser</a></b><br>");
@@ -402,39 +408,45 @@ App = {
       } catch (err) {
         return App.showError("Access to your Ethereum account rejected.");
       }
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    
+    
+    App.account = account;
+    $("#accountAddress").html(account);
+    App.web3 = new Web3(window.ethereum);
+    App.web3.eth.defaultAccount = App.account;
+    let contractx = App.web3.eth
+      .contract(App.ContractABI)
+      .at(App.contractAddress);
+    //console.log(contractx);
 
-    // Load account data
-    web3.eth.getCoinbase(function (err, account) {
-      if (err === null) {
-        App.account = account;
-        $("#accountAddress").html(account);
-        let contractx = web3.eth
-          .contract(App.ContractABI)
-          .at(App.contractAddress);
-        //console.log(contractx);
-
-        contractx.getaddername(App.account.toString(), function (err, result) {
-          if (err !== null) {
-            console.log(err);
-            return App.showError(err.toString());
-          } else {
-            console.log(result);
-            if (result === null || result === "") {
-              loader.hide();
-              get_name.show();
-              content.hide();
-              acinfo.hide();
-            } else {
-              App.name = result.toString();
-              $("#accountName").html(App.name);
-            }
-          }
-        });
-      } else {
+    contractx.getaddername(App.account.toString(), function (err, result) {
+      if (err !== null) {
         console.log(err);
         return App.showError(err.toString());
+      } else {
+        console.log(result);
+        if (result === null || result === "") {
+          loader.hide();
+          get_name.show();
+          content.hide();
+          acinfo.hide();
+        } else {
+          App.name = result.toString();
+          $("#accountName").html(App.name);
+        }
       }
     });
+    // // Load account data
+    // web3.eth.getCoinbase(function (err, account) {
+    //   if (err === null) {
+        
+    //   } else {
+    //     console.log(err);
+    //     return App.showError(err.toString());
+    //   }
+    // });
 
     get_name.hide();
     loader.hide();
