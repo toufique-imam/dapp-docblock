@@ -89,69 +89,119 @@ App = {
     return App.initContract();
   },
   initContract: function () {
-    App.contractAddress = "0x13F9150A8D9A85Fe733f9C70A550583363693468";
+    App.contractAddress = "0x1437be986C680AE0e04ccfaB84d9873045b67dFA";
     App.ContractABI = [
       {
-        constant: true,
-        inputs: [{ internalType: "string", name: "_hash", type: "string" }],
-        name: "getadderkey",
-        outputs: [{ internalType: "string", name: "name", type: "string" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: false,
-        inputs: [
-          { internalType: "string", name: "_pubkey", type: "string" },
-          { internalType: "string", name: "name", type: "string" }
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_hash",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "x",
+            "type": "string"
+          }
         ],
-        name: "setaddername",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function"
+        "name": "add",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
       },
       {
-        constant: true,
-        inputs: [{ internalType: "string", name: "_pubkey", type: "string" }],
-        name: "verify_name",
-        outputs: [{ internalType: "uint256", name: "ok", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
-      },
-      {
-        constant: false,
-        inputs: [
-          { internalType: "string", name: "_hash", type: "string" },
-          { internalType: "string", name: "x", type: "string" }
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_pubkey",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          }
         ],
-        name: "add",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function"
+        "name": "setaddername",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
       },
       {
-        constant: true,
-        inputs: [{ internalType: "string", name: "_hash", type: "string" }],
-        name: "verify_doc",
-        outputs: [
-          { internalType: "uint256", name: "dateAdded", type: "uint256" }
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_hash",
+            "type": "string"
+          }
         ],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
+        "name": "getadderkey",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
       },
       {
-        constant: true,
-        inputs: [{ internalType: "string", name: "_pubkey", type: "string" }],
-        name: "getaddername",
-        outputs: [{ internalType: "string", name: "name", type: "string" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function"
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_pubkey",
+            "type": "string"
+          }
+        ],
+        "name": "getaddername",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_hash",
+            "type": "string"
+          }
+        ],
+        "name": "verify_doc",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "dateAdded",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_pubkey",
+            "type": "string"
+          }
+        ],
+        "name": "verify_name",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "ok",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
       }
     ];
     return App.render();
@@ -293,7 +343,7 @@ App = {
     let contractx = App.web3.eth.contract(App.ContractABI).at(App.contractAddress);
     console.log(contractx);
     contractx.verify_doc(s, function (err, result) {
-      //console.log(err, result);
+      console.log(err, result);
       if (err) {
         console.error(err);
         return App.showError(err.message.toString() + err.stack.toString());

@@ -1,0 +1,3 @@
+- <a link = "https://www.web3.university/tracks/create-a-smart-contract/deploy-your-first-smart-contract">reference </a>
+- contract address: 0x1437be986C680AE0e04ccfaB84d9873045b67dFA
+- contract <a link="https://goerli.etherscan.io/tx/0x240027c8d6520067e1bd1d9ce14afa344c457c96613514204275b92233d791eb">etherscan</a>
