@@ -35,7 +35,8 @@ You need to pay attention to configure MetaMask and make sure you have enough et
 
 # TODO:
 
-* Add folder upload and mail send
+* migrate to goerli
+* check functions working
 
 # Donation Address
 
