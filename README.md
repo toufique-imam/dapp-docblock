@@ -1,3 +1,6 @@
+## Check new repo for document verification which uses new ethereum 2.0 and stacks
+- https://github.com/toufique-imam/certificate-verifiation
+
 # Document Verification on blockchain network
 ---
 
