@@ -3,6 +3,9 @@
 ---
 # Document Verification on blockchain network
 ---
+[![GitHub Stars](https://img.shields.io/github/stars/toufique-imam/dapp-docblock?style=social)](https://github.com/toufique-imam/dapp-docblock)
+[![download](https://img.shields.io/github/downloads/toufique-imam/dapp-docblock/total.svg)](https://github.com/toufique-imam/dapp-docblock)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=toufique-imam/dapp-docblock)
 ---
 This is a DApp example on Ethereum Ropsten testnet using Truffle Framework. It is deployed in Heroku: https://doc-block.herokuapp.com/
 
